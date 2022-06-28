@@ -61,12 +61,12 @@ jobs:
     - name: executing remote ssh commands to deploy
       uses: appleboy/ssh-action@master
       with:
-        host: 51.250.16.38
-        username: oilkater
-        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC8wtwoal8hl7+6zFwmnRr8RJFXvljCQtAa4s/njty1/TpNr/h4A+db0ziThGsvlsPqGoEKbLYPCF17K/4PsbiTjmzmc6fmfxURyK108W16rY4gyIPA/KSz1AUegWPM7EMAmbvq7U2dMmiYymUZsYyZoH2etIG1tRl8lPLG/RsbaiPZGK2COHD4XEKBDg4PmmZz9BTuI9LJjfFS8Cnqp2mDEsHv0CYheP4PwfvZzut26+cN7n1udEprcezv4zJ7FwKo2OGBQizw+pzd8sN8pmOcglQEE8krnS2vKv3ccZl5IzWdwmRO+A85NRUUh8VmcyNeBUnzW5vadRJUXvYfRqEVyltIgoAAtC/npW+ILtLFtl70ztA0jLujeuvfFY0PuSAkxlehQe8TFkNlItQznOeVWnFz0n/RzXHfY6Xf3OD8dzMV3vicgj0gqFzV37YMaaL7xS2DcGk0jpA+ExpLWmtYoNHI5EHYyO8MvpHeVSjueR1RXxXHUMtX082ZVNsypdU= family@family-X551MA
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.SSH_KEY }}
         script: |
           # Выполняет pull образа с DockerHub
           sudo docker pull oilkater/infra
           #остановка всех контейнеров
           sudo docker stop $(sudo docker ps -a -q)
-          sudo docker run --rm -d -p 5000:5000 oilkater/infra
+          sudo docker run --rm -d -p 5000:5000 oilkater/infra 
